@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Veículo - Gerenciamento de Frota</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Adicionar Novo Veículo</h2>
+        <form id="veiculoForm">
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" class="form-control" id="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo</label>
+                <input type="text" class="form-control" id="modelo" required>
+            </div>
+            <div class="form-group">
+                <label for="ano">Ano</label>
+                <input type="number" class="form-control" id="ano" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
