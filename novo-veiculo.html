@@ -5,27 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novo Veículo - Gerenciamento de Frota</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="container">
         <h2 class="mt-5">Adicionar Novo Veículo</h2>
         <form id="veiculoForm">
             <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" required>
-            </div>
-            <div class="form-group">
                 <label for="modelo">Modelo</label>
                 <input type="text" class="form-control" id="modelo" required>
+            </div>
+            <div class="form-group">
+                <label for="placa">Placa</label>
+                <input type="text" class="form-control" id="placa" required>
             </div>
             <div class="form-group">
                 <label for="ano">Ano</label>
                 <input type="number" class="form-control" id="ano" required>
             </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" required>
+                    <option value="disponivel">Disponível</option>
+                    <option value="manutencao">Manutenção</option>
+                    <option value="ocupado">Ocupado</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
-    <script src="js/scripts.js"></script>
+    <script>
+        document.getElementById('veiculoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const modelo = document.getElementById('modelo').value;
+            const placa = document.getElementById('placa').value;
+            const ano = document.getElementById('ano').value;
+            const status = document.getElementById('status').value;
+
+            fetch('http://localhost:8080/api/veiculos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ modelo, placa, ano, status })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Veículo cadastrado com sucesso!');
+                    window.location.href = 'veiculos.html';
+                } else {
+                    alert('Falha no cadastro. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao cadastrar veículo.');
+            });
+        });
+    </script>
 </body>
 </html>
