@@ -12,12 +12,23 @@
         <h2 class="mt-5">Cadastro de Usuário</h2>
         <form id="userForm">
             <div class="form-group">
-                <label for="username">Usuário:</label>
-                <input type="text" class="form-control" id="username" required>
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" required>
             </div>
             <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" class="form-control" id="password" required>
+                <label for="email">E-mail:</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" class="form-control" id="senha" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select class="form-control" id="role" required>
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
@@ -26,15 +37,17 @@
     <script>
         document.getElementById('userForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+            const role = document.getElementById('role').value;
 
             fetch('http://localhost:8080/api/usuarios', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({ nome, email, senha, role })
             })
             .then(response => {
                 if (response.ok) {
