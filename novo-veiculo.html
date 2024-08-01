@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="ano">Ano</label>
-                <input type="number" class="form-control" id="ano" required>
+                <input type="text" class="form-control" id="ano" required>
             </div>
             <div class="form-group">
                 <label for="status">Status</label>
@@ -41,10 +41,13 @@
             const ano = document.getElementById('ano').value;
             const status = document.getElementById('status').value;
 
+            const auth = localStorage.getItem('auth');  // Obter as credenciais salvas
+
             fetch('http://localhost:8080/api/veiculos', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': auth  // Use as credenciais salvas
                 },
                 body: JSON.stringify({ modelo, placa, ano, status })
             })
@@ -52,6 +55,9 @@
                 if (response.ok) {
                     alert('Veículo cadastrado com sucesso!');
                     window.location.href = 'veiculos.html';
+                } else if(response.status === 401) {
+                    alert('Não autorizado. Faça login novamente.');
+                    window.location.href = 'login.html';
                 } else {
                     alert('Falha no cadastro. Tente novamente.');
                 }

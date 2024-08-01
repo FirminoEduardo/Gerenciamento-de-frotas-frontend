@@ -40,6 +40,7 @@
             .then(response => {
                 if (response.ok) {
                     alert('Login bem-sucedido!');
+                    localStorage.setItem('auth', 'Basic ' + btoa(email + ':' + senha));
                     window.location.href = 'veiculos.html';
                 } else {
                     alert('Falha no login. Verifique suas credenciais.');
